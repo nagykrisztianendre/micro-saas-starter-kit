@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { authService, getSessionCookieName, requireAuthenticated } from '../../../../modules/auth';
+import { authService, getSessionCookieName, requireAuth } from '../../../../modules/auth';
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -13,7 +13,7 @@ export default async function DashboardPage() {
     redirect('/login');
   }
 
-  const { user } = requireAuthenticated(authState);
+  const { user } = requireAuth(authState);
 
   return (
     <main>

@@ -21,3 +21,5 @@ export function requireRole(authState: AuthState | null, role: UserRole): AuthSt
 
   return state;
 }
+
+export const requireAuthenticated = requireAuth;
