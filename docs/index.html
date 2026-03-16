@@ -3,10 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Micro-SaaS Starter Kit Docs</title>
+    <title>Micro-SaaS Starter Kit</title>
+    <style>
+      body { font-family: Inter, system-ui, -apple-system, sans-serif; margin: 0; color: #111827; }
+      .container { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+      h1,h2,h3 { line-height: 1.2; }
+      .hero { padding: 2rem 0; }
+      .muted { color: #4b5563; }
+      .cta { display: inline-block; margin-right: .75rem; margin-top: .5rem; padding: .75rem 1rem; border-radius: 8px; text-decoration: none; }
+      .cta.primary { background: #111827; color: #fff; }
+      .cta.secondary { border: 1px solid #d1d5db; color: #111827; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 1rem; }
+      .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; }
+      table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+      th, td { border: 1px solid #e5e7eb; padding: .7rem; text-align: left; }
+      .trust { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1rem; margin-top: 1.5rem; }
+    </style>
   </head>
   <body>
-    <h1>Micro-SaaS Starter Kit</h1>
-    <p>Documentation placeholder for architecture, modules, and deployment guides.</p>
+    <main class="container">
+      <section class="hero">
+        <h1>Ship your Micro-SaaS in days, not months.</h1>
+        <p class="muted">A modular Next.js starter kit with product-ready docs, launch workflows, and paid-delivery packaging so you can build and sell with less support overhead.</p>
+        <a class="cta primary" href="https://gumroad.com/l/your-product">Buy Pro on Gumroad</a>
+        <a class="cta secondary" href="../README.md">View Lite on GitHub</a>
+      </section>
+
+      <section>
+        <h2>Why founders choose this kit</h2>
+        <ul>
+          <li>Start from practical auth, dashboard, billing, and admin module foundations.</li>
+          <li>Use deterministic workflows for setup, testing, and release delivery.</li>
+          <li>Sell confidently with included sales docs, support templates, and launch assets.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Feature grid</h2>
+        <div class="grid">
+          <article class="card"><h3>Modular architecture</h3><p class="muted">Organized by domain modules for clearer ownership and easier customization.</p></article>
+          <article class="card"><h3>Onboarding docs</h3><p class="muted">Getting started, architecture, troubleshooting, and FAQ documentation included.</p></article>
+          <article class="card"><h3>Release automation</h3><p class="muted">Tag-driven CI workflow builds and uploads versioned ZIP artifacts.</p></article>
+          <article class="card"><h3>Sales-ready packaging</h3><p class="muted">Lite vs Pro vs Team positioning and Gumroad launch material templates.</p></article>
+        </div>
+      </section>
+
+      <section>
+        <h2>Package comparison</h2>
+        <table>
+          <thead>
+            <tr><th>Package</th><th>Best for</th><th>Includes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lite</td><td>Evaluation and trust-building</td><td>Core architecture, auth, basic dashboard, docs preview</td></tr>
+            <tr><td>Pro</td><td>Builders who want speed</td><td>Billing/admin coverage, advanced docs, release/support templates</td></tr>
+            <tr><td>Team</td><td>Agencies and internal teams</td><td>Commercial license positioning, team onboarding, priority support placeholder</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>FAQ</h2>
+        <h3>Can I use this for client work?</h3>
+        <p class="muted">Yes. Use Team positioning for agency/client delivery and internal team onboarding.</p>
+        <h3>Is billing production complete?</h3>
+        <p class="muted">Billing is scaffolded with mocked test expectations and clear extension points for your Stripe setup.</p>
+        <h3>How do I deliver paid versions?</h3>
+        <p class="muted">Use the release workflow to generate versioned ZIP artifacts and upload to Gumroad.</p>
+      </section>
+
+      <section class="trust">
+        <h2>Built for trust + conversion</h2>
+        <p class="muted">Public Lite repo for transparency. Paid Pro/Team artifacts for speed and commercial usage. Designed to reduce pre-sale and post-sale friction.</p>
+      </section>
+    </main>
   </body>
 </html>
