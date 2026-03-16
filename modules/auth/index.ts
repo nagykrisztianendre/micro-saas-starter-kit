@@ -1,15 +1,12 @@
-import { join } from 'node:path';
-
+import { db } from '../../core/db';
 import { AuthService } from './auth.service';
-import { FileSessionRepository, InMemorySessionRepository } from './session.repository';
-import { FileUserRepository, InMemoryUserRepository } from './user.repository';
+import { PrismaSessionRepository, InMemorySessionRepository } from './session.repository';
+import { PrismaUserRepository, InMemoryUserRepository } from './user.repository';
 
-const DEFAULT_STORE_PATH = join(process.cwd(), 'modules', 'auth', 'data', 'auth-store.json');
-
-export function createFileAuthService(storePath = DEFAULT_STORE_PATH): AuthService {
+export function createAuthService(): AuthService {
   return new AuthService({
-    userRepository: new FileUserRepository(storePath),
-    sessionRepository: new FileSessionRepository(storePath),
+    userRepository: new PrismaUserRepository(db),
+    sessionRepository: new PrismaSessionRepository(db),
   });
 }
 
@@ -20,11 +17,19 @@ export function createInMemoryAuthService(): AuthService {
   });
 }
 
-export const authService = createFileAuthService();
+export const authService = createAuthService();
+
+export const authModule = {
+  moduleName: 'auth',
+  services: { authService },
+  routes: ['/login', '/register', '/logout'],
+  types: ['AuthUser', 'UserSession'],
+};
 
 export * from './auth.service';
 export * from './guards';
 export * from './session';
+export * from './session.service';
 export * from './session.repository';
 export * from './types';
 export * from './user.repository';

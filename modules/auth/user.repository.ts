@@ -1,13 +1,7 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname } from 'node:path';
+import type { PrismaClient } from '@prisma/client';
 import { randomUUID } from 'node:crypto';
 
-import type { AuthStore, User, UserRepository, UserRole } from './types';
-
-const INITIAL_STORE: AuthStore = {
-  users: [],
-  sessions: [],
-};
+import type { User, UserRepository, UserRole } from './types';
 
 export class InMemoryUserRepository implements UserRepository {
   private users: User[] = [];
@@ -33,62 +27,49 @@ export class InMemoryUserRepository implements UserRepository {
     return this.users.find((user) => user.id === id) ?? null;
   }
 
+  async list(): Promise<User[]> {
+    return [...this.users];
+  }
+
   async clear(): Promise<void> {
     this.users = [];
   }
 }
 
-export class FileUserRepository implements UserRepository {
-  constructor(private readonly storePath: string) {}
+export class PrismaUserRepository implements UserRepository {
+  constructor(private readonly prisma: PrismaClient) {}
 
   async create(input: { email: string; passwordHash: string; role: UserRole }): Promise<User> {
-    const store = await this.loadStore();
-
-    const user: User = {
-      id: randomUUID(),
-      email: input.email,
-      passwordHash: input.passwordHash,
-      role: input.role,
-      createdAt: new Date().toISOString(),
-    };
-
-    store.users.push(user);
-    await this.saveStore(store);
-
-    return user;
+    const user = await this.prisma.user.create({ data: input });
+    return mapUser(user);
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    const store = await this.loadStore();
-    return store.users.find((user) => user.email === email) ?? null;
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    return user ? mapUser(user) : null;
   }
 
   async findById(id: string): Promise<User | null> {
-    const store = await this.loadStore();
-    return store.users.find((user) => user.id === id) ?? null;
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    return user ? mapUser(user) : null;
+  }
+
+  async list(): Promise<User[]> {
+    const users = await this.prisma.user.findMany({ orderBy: { createdAt: 'desc' } });
+    return users.map(mapUser);
   }
 
   async clear(): Promise<void> {
-    const store = await this.loadStore();
-    await this.saveStore({ ...store, users: [] });
+    await this.prisma.user.deleteMany();
   }
+}
 
-  private async loadStore(): Promise<AuthStore> {
-    try {
-      const content = await readFile(this.storePath, 'utf-8');
-      const parsed = JSON.parse(content) as Partial<AuthStore>;
-
-      return {
-        users: parsed.users ?? [],
-        sessions: parsed.sessions ?? [],
-      };
-    } catch {
-      return INITIAL_STORE;
-    }
-  }
-
-  private async saveStore(store: AuthStore): Promise<void> {
-    await mkdir(dirname(this.storePath), { recursive: true });
-    await writeFile(this.storePath, JSON.stringify(store, null, 2), 'utf-8');
-  }
+function mapUser(user: { id: string; email: string; passwordHash: string; role: string; createdAt: Date }): User {
+  return {
+    id: user.id,
+    email: user.email,
+    passwordHash: user.passwordHash,
+    role: user.role as UserRole,
+    createdAt: user.createdAt.toISOString(),
+  };
 }
