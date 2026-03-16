@@ -1,6 +1,8 @@
 import { headers } from 'next/headers';
 import { NextResponse } from 'next/server';
 
+import { getAppConfig } from '../../../../core/config';
+
 /**
  * Placeholder webhook handler.
  *
@@ -8,9 +10,9 @@ import { NextResponse } from 'next/server';
  * Stripe signature verification + event-specific business logic.
  */
 export async function POST(request: Request) {
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const webhookSecret = getAppConfig().billing.stripeWebhookSecret;
   if (!webhookSecret) {
-    return NextResponse.json({ error: 'STRIPE_WEBHOOK_SECRET is not configured.' }, { status: 500 });
+    return NextResponse.json({ error: 'Billing webhook secret is missing from configuration.' }, { status: 500 });
   }
 
   const rawBody = await request.text();

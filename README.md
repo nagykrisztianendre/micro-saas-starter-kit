@@ -1,80 +1,45 @@
 # Micro-SaaS Starter Kit
 
-Build and ship your SaaS faster with a production-ready Next.js starter designed to be sold, customized, and deployed with low support overhead.
+Production-ready Next.js + TypeScript scaffold designed to feel like a premium product, not just a code dump.
 
-## Why this starter exists
-Most starter kits give you code. This package gives you **code + product packaging + launch operations** so you can:
-- launch faster,
-- reduce setup friction for buyers/teams,
-- and confidently sell a paid starter via Gumroad.
+## What's included
+- Auth (register/login/logout/session)
+- Billing foundation (plans, subscription state, Stripe checkout/webhook placeholders)
+- Admin visibility (users + subscriptions)
+- Organization/member/invite route boundaries
+- API keys and audit log UI boundaries
+- Environment/config validation layer
+- Deterministic test suite + release/docs scaffolding
 
-## What is included
-- Modular Next.js + TypeScript architecture
-- Auth, dashboard, billing, and admin module foundations
-- Prisma + SQLite default local setup
-- Deterministic CI checks and test scaffolding
-- Product docs (getting started, architecture, troubleshooting, FAQ)
-- Sales docs and launch assets for paid distribution
-- Release automation for versioned ZIP delivery
+## First 15 minutes
+1. `pnpm install`
+2. `cp .env.example .env`
+3. `pnpm prisma:generate`
+4. `pnpm prisma:migrate`
+5. `pnpm prisma:seed`
+6. `pnpm dev`
+7. Log in with seeded users from `docs/demo-data.md`
 
-## Lite vs Pro vs Team
-| Package | Positioning | Includes |
-| --- | --- | --- |
-| **Lite** | Public repo / trust-building | Core architecture, auth, basic dashboard, docs preview |
-| **Pro** | Paid ZIP for builders | Billing + admin modules, deploy automation guidance, advanced docs, release templates, support templates |
-| **Team** | Commercial/team license | Pro + team onboarding docs, agency-friendly usage model, priority support placeholder |
+## Environment variables
+See `.env.example` for all supported variables.
 
-> This repository is structured to support all three commercial tiers with clear messaging and delivery artifacts.
+Required:
+- `DATABASE_URL`
 
-## Quick start
-1. Install dependencies: `pnpm install`
-2. Copy environment: `cp .env.example .env`
-3. Generate Prisma client: `pnpm prisma:generate`
-4. Run migrations: `pnpm prisma:migrate`
-5. Seed local data: `pnpm prisma:seed`
-6. Start dev server: `pnpm dev`
+Common local defaults:
+- `EMAIL_PROVIDER=mock`
+- Stripe values use safe placeholders unless you wire real Stripe
 
-Then open `http://localhost:3000`.
-
-## Running in Codespaces
-1. Open this repo in GitHub Codespaces.
-2. Wait for devcontainer bootstrapping.
-3. Run:
-   - `pnpm install`
-   - `cp .env.example .env`
-   - `pnpm prisma:generate`
-   - `pnpm prisma:migrate`
-   - `pnpm prisma:seed`
-   - `pnpm dev`
-
-## Project structure
-- `app/` — Next.js App Router entry points
-- `core/` — runtime config and shared helpers
-- `modules/` — domain modules (`auth`, `billing`, `dashboard`, `admin`)
-- `src/` — reusable exports/utilities
-- `docs/` — onboarding, architecture, sales, launch docs
-- `scripts/` — automation scripts
-- `.github/` — CI, release, issue/PR templates
-
-## Who this is for
-- Indie founders validating SaaS ideas quickly
-- Freelancers and agencies delivering client MVPs
-- Teams standardizing internal SaaS scaffolds
-- Creator-founders selling paid starter kits
-
-## Roadmap
-- Additional deployment playbooks
-- More module-level extension examples
-- Extended billing/webhook operations guides
-- Multi-tenant team examples for Team tier
-
-## Buy / Upgrade CTA
-- **Lite (public):** use this repository as the evaluation version
-- **Pro (paid):** Gumroad checkout placeholder → `https://gumroad.com/l/your-product`
-- **Team (license):** contact placeholder → `founder@yourdomain.com`
-
-See:
-- `docs/sales/gumroad.md`
+## Key docs
+- `docs/getting-started.md`
+- `docs/architecture.md`
+- `docs/modules.md`
+- `docs/demo-data.md`
+- `docs/troubleshooting.md`
+- `docs/release-checklist.md`
 - `docs/sales/pricing.md`
-- `docs/sales/lite-vs-pro.md`
-- `docs/sales/launch-checklist.md`
+
+## Productization
+- Lite vs Pro positioning: `docs/sales/lite-vs-pro.md`
+- Pricing page copy: `docs/sales/pricing.md`
+- Launch checklist: `docs/sales/launch-checklist.md`

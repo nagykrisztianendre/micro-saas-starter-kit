@@ -1,19 +1,9 @@
 # Changelog
 
-All notable changes to this project should be documented in this file.
-
-The format is inspired by Keep a Changelog and follows semantic versioning principles.
-
-## [Unreleased]
-### Added
-- Productized documentation set for onboarding, architecture, troubleshooting, FAQ, sales, and launch.
-- Release workflow scaffold for versioned ZIP artifact generation.
-- Support automation templates for issues and pull requests.
-
-### Changed
-- README rewritten for conversion-oriented Lite/Pro/Team positioning.
-- Documentation landing page updated with product marketing sections.
-
-## [1.0.0] - YYYY-MM-DD
-### Added
-- Initial public starter release.
+## 0.2.0 - hardening and polish milestone
+- Added shared app shell and global UI consistency improvements.
+- Hardened auth validation and error messaging with `core/errors.ts`.
+- Added environment/config foundations (`core/env.ts`, `core/config.ts`).
+- Expanded seed data with admin + standard user + sample subscription.
+- Added organizations, API keys, and audit logs route placeholders for cohesive demo flow.
+- Expanded docs for demo data, module boundaries, release checks, and productization messaging.

@@ -28,7 +28,7 @@ describe('auth registration', () => {
         email: 'duplicate@example.com',
         password: 'strong-password',
       }),
-    ).rejects.toThrow('Email is already registered.');
+    ).rejects.toThrow('already registered');
   });
 
   it('rejects invalid email', async () => {
@@ -39,7 +39,7 @@ describe('auth registration', () => {
         email: 'not-an-email',
         password: 'strong-password',
       }),
-    ).rejects.toThrow('Invalid email format.');
+    ).rejects.toThrow('valid email address');
   });
 
   it('rejects weak password', async () => {

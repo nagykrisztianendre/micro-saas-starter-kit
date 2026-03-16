@@ -1,25 +1,13 @@
 # FAQ
 
-## What does Lite include?
-Lite is the public positioning: core architecture, auth, basic dashboard, and docs preview.
+## Is this production-ready?
+It's production-oriented scaffolding with hardened validation/configuration and deterministic tests. You still need domain-specific business logic.
 
-## What does Pro include?
-Pro adds paid positioning around billing/admin foundations, release automation workflows, and deeper sales/support docs.
+## Can I switch to Postgres later?
+Yes. Update Prisma datasource provider/url and rerun migrations.
 
-## What does Team include?
-Team builds on Pro with commercial/team license messaging, agency-friendly onboarding, and priority support placeholder.
+## Can I keep email mocked in development?
+Yes. `EMAIL_PROVIDER=mock` is the default and recommended for deterministic local/testing behavior.
 
-## Can I use this starter for commercial products?
-Yes. Choose the license/package positioning that matches your distribution model.
-
-## Is this multi-tenant out of the box?
-It is a modular starter, not a complete enterprise tenancy platform. Extend domain boundaries as needed.
-
-## Can I replace sqlite?
-Yes. Prisma allows changing datasource configuration for managed databases.
-
-## How do I customize modules safely?
-Start in `modules/<domain>` service/repository layers, then adjust route/page boundaries in `app/`.
-
-## Do I need Stripe to run locally?
-No. Local development can run without active Stripe calls; production billing requires proper key configuration.
+## How do I add premium-only modules?
+Use route/module boundaries and sales docs to gate features by package tier.

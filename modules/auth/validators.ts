@@ -1,3 +1,4 @@
+import { ValidationError } from '../../core/errors';
 import type { LoginInput, RegisterInput } from './types';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -9,13 +10,13 @@ export function normalizeEmail(email: string): string {
 
 export function validateEmail(email: string): void {
   if (!EMAIL_REGEX.test(email)) {
-    throw new Error('Invalid email format.');
+    throw new ValidationError('Enter a valid email address.');
   }
 }
 
 export function validatePassword(password: string): void {
   if (password.length < MIN_PASSWORD_LENGTH) {
-    throw new Error(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`);
+    throw new ValidationError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long.`);
   }
 }
 

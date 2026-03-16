@@ -4,7 +4,7 @@ import { requireAuth } from '../modules/auth';
 
 describe('route protection', () => {
   it('throws when unauthenticated', () => {
-    expect(() => requireAuth(null)).toThrow('Authentication required.');
+    expect(() => requireAuth(null)).toThrow('Please log in to continue.');
   });
 
   it('simulates successful login redirect target', () => {

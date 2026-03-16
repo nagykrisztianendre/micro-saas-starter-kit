@@ -1,3 +1,4 @@
+import { AccessDeniedError, AuthRequiredError } from '../../core/errors';
 import type { AuthState, UserRole } from './types';
 
 export function isAuthenticated(authState: AuthState | null): authState is AuthState {
@@ -6,7 +7,7 @@ export function isAuthenticated(authState: AuthState | null): authState is AuthS
 
 export function requireAuth(authState: AuthState | null): AuthState {
   if (!isAuthenticated(authState)) {
-    throw new Error('Authentication required.');
+    throw new AuthRequiredError();
   }
 
   return authState;
@@ -16,7 +17,7 @@ export function requireRole(authState: AuthState | null, role: UserRole): AuthSt
   const state = requireAuth(authState);
 
   if (state.user.role !== role) {
-    throw new Error('Forbidden.');
+    throw new AccessDeniedError();
   }
 
   return state;
