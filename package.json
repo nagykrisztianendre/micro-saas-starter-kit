@@ -1,0 +1,32 @@
+{
+  "name": "micro-saas-starter-kit",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Production-ready Micro-SaaS template with authentication, billing, dashboard and deploy automation.",
+  "packageManager": "pnpm@10.17.1",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "next": "15.2.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.9",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "@typescript-eslint/eslint-plugin": "8.25.0",
+    "@typescript-eslint/parser": "8.25.0",
+    "eslint": "8.57.1",
+    "eslint-config-prettier": "10.0.1",
+    "prettier": "3.5.2",
+    "typescript": "5.8.2",
+    "vitest": "3.0.7"
+  }
+}
