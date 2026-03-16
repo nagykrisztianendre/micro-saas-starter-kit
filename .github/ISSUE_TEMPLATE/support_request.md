@@ -14,7 +14,8 @@ labels: support
 - [ ] README quick start
 - [ ] docs/getting-started.md
 - [ ] docs/troubleshooting.md
-- [ ] docs/faq.md
+- [ ] docs/faq-buyers.md
+- [ ] docs/support.md
 
 ## Project context
 - Package/Tier: Lite / Pro / Team

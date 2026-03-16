@@ -23,3 +23,6 @@ labels: enhancement
 - How does this reduce setup/support time?
 
 ## Additional context
+
+## Checklist
+- [ ] I reviewed `docs/support.md` for support/feature request expectations
