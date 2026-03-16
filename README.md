@@ -6,7 +6,7 @@ Production-ready Micro-SaaS template with authentication, billing, dashboard and
 
 ```bash
 corepack enable
-corepack prepare pnpm@latest --activate
+corepack prepare pnpm@10.17.1 --activate
 pnpm install
 pnpm lint
 pnpm typecheck
