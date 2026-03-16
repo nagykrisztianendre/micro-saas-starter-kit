@@ -9,7 +9,7 @@ Ship a production-grade SaaS foundation in days, not months, with a modular Next
 - ✅ Deterministic local setup and CI-friendly workflows
 - ✅ Launch docs for packaging, demo, onboarding, and support
 
-**Buy Pro (placeholder):** `https://gumroad.com/l/your-product`
+**Buy Pro (placeholder):** `https://krisztianova71.gumroad.com/l/chswu`
 
 **Screenshots:** See `docs/launch/screenshots.md` for planned capture list.
 
@@ -106,4 +106,4 @@ Full comparison: `docs/sales/lite-vs-pro.md`.
 
 If Lite gives you confidence, use Pro to save implementation and launch time.
 
-**CTA placeholder:** `https://gumroad.com/l/your-product`
+**CTA placeholder:** `https://krisztianova71.gumroad.com/l/chswu`

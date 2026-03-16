@@ -43,4 +43,4 @@ Show that a buyer can install, run, and explore core SaaS workflows quickly.
 
 - "Start with Lite to evaluate architecture."
 - "Use Pro to accelerate production launch."
-- CTA placeholder: `https://gumroad.com/l/your-product`
+- CTA placeholder: `https://krisztianova71.gumroad.com/l/chswu`
