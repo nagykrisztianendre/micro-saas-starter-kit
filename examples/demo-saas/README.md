@@ -1,4 +1,14 @@
-# Demo SaaS
+# Demo SaaS Example
 
-The runnable Next.js demo app lives in the repository root `app/` folder.
-This folder documents the example feature set: dashboard, billing, admin, and settings.
+This folder contains a lightweight example route map for a productized demo tenant.
+
+## Included pages
+
+- `/login`
+- `/register`
+- `/dashboard`
+- `/billing`
+- `/admin`
+- `/settings`
+
+Use these stubs as a blueprint when packaging alternate demos for Lite/Pro tiers.
