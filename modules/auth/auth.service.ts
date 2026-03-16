@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 
+import { AppError } from '../../core/errors';
 import { getAuthConfig } from '../../core/auth-config';
 import type { AuthState, AuthUser, LoginInput, RegisterInput, SessionRepository, UserRepository } from './types';
 import { validateLoginInput, validateRegisterInput } from './validators';
@@ -22,7 +23,7 @@ export class AuthService {
     const existingUser = await this.deps.userRepository.findByEmail(normalizedInput.email);
 
     if (existingUser) {
-      throw new Error('Email is already registered.');
+      throw new AppError('AUTH_DUPLICATE_EMAIL', 'This email is already registered. Try logging in instead.', 409, true);
     }
 
     const passwordHash = await hashPassword(normalizedInput.password);
@@ -36,7 +37,7 @@ export class AuthService {
     const user = await this.deps.userRepository.findByEmail(normalizedInput.email);
 
     if (!user || !(await verifyPassword(normalizedInput.password, user.passwordHash))) {
-      throw new Error('Invalid credentials.');
+      throw new AppError('AUTH_INVALID_CREDENTIALS', 'Invalid email or password.', 401, true);
     }
 
     const expiresAt = new Date(Date.now() + this.sessionDurationMs).toISOString();

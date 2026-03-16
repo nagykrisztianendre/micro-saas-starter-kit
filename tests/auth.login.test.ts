@@ -33,7 +33,7 @@ describe('auth login', () => {
         email: 'wrong-pass@example.com',
         password: 'incorrect-password',
       }),
-    ).rejects.toThrow('Invalid credentials.');
+    ).rejects.toThrow('Invalid email or password.');
   });
 
   it('fails for unknown email', async () => {
@@ -44,6 +44,6 @@ describe('auth login', () => {
         email: 'unknown@example.com',
         password: 'strong-password',
       }),
-    ).rejects.toThrow('Invalid credentials.');
+    ).rejects.toThrow('Invalid email or password.');
   });
 });

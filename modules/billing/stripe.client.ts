@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 
+import { getAppConfig } from '../../core/config';
 import type { CheckoutSessionResult } from './billing.types';
 
 export interface StripeClient {
@@ -9,7 +10,7 @@ export interface StripeClient {
 export class StripeSdkClient implements StripeClient {
   private readonly stripe: Stripe;
 
-  constructor(secretKey = process.env.STRIPE_SECRET_KEY ?? 'sk_test_placeholder') {
+  constructor(secretKey = getAppConfig().billing.stripeSecretKey) {
     this.stripe = new Stripe(secretKey);
   }
 

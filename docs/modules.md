@@ -1,21 +1,13 @@
-# Module pattern
+# Modules
 
-Each module exports a metadata contract:
+## Auth
+Registration, login, session checks, role guards.
 
-- `moduleName`
-- `services`
-- `routes`
-- `types`
+## Billing
+Plan/subscription repositories + Stripe checkout skeleton.
 
-## Add a module
+## Admin
+Read-only operational visibility for users/subscriptions.
 
-1. Create `modules/<name>/index.ts`.
-2. Keep business logic in services and repositories.
-3. Export metadata + runtime services.
-4. Register the module in `modules/index.ts`.
-
-## Disable a module
-
-- Stop exporting it from `modules/index.ts`.
-- Remove or gate app routes that depend on it.
-- Keep interfaces isolated so other modules do not import disabled internals.
+## Teams/API Keys/Audit Logs/Feature Flags
+Provided as route and docs boundaries so buyers can extend without rethinking architecture.
