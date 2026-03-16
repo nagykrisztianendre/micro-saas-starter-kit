@@ -32,5 +32,5 @@ labels: bug
 
 ## Checklist
 - [ ] I pulled latest changes and re-ran setup steps
-- [ ] I reviewed `docs/getting-started.md` and `docs/troubleshooting.md`
+- [ ] I reviewed `docs/getting-started.md`, `docs/troubleshooting.md`, and `docs/support.md`
 - [ ] I included exact command/output where failure occurs
