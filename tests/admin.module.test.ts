@@ -18,7 +18,7 @@ describe('admin module', () => {
         },
         'admin',
       ),
-    ).toThrow('Forbidden.');
+    ).toThrow('You do not have access to this resource.');
   });
 
   it('lists users', async () => {
