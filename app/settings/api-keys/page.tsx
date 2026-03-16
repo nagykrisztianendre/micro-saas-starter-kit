@@ -1,9 +1,11 @@
 import { ConfirmButton } from '../../_components/confirm-button';
 import { AppShell } from '../../_components/shell';
+import { readSearchParam, type PageSearchParams } from '../../_components/search-params';
 
-export default function ApiKeysPage({ searchParams }: { searchParams: { success?: string } }) {
+export default async function ApiKeysPage({ searchParams }: { searchParams: PageSearchParams }) {
+  const successMessage = await readSearchParam(searchParams, 'success');
   return (
-    <AppShell title="API keys" description="Create and revoke machine credentials" notice={searchParams.success}>
+    <AppShell title="API keys" description="Create and revoke machine credentials" notice={successMessage}>
       <p className="empty">No API keys yet.</p>
       <form>
         <label htmlFor="name">Key name</label>

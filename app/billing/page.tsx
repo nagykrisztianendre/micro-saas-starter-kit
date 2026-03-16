@@ -7,8 +7,11 @@ import { billingService } from '../../modules/billing';
 import { ConfirmButton } from '../_components/confirm-button';
 import { FormSubmitButton } from '../_components/form-submit-button';
 import { AppShell } from '../_components/shell';
+import { readSearchParam, type PageSearchParams } from '../_components/search-params';
 
-export default async function BillingPage({ searchParams }: { searchParams: { success?: string; error?: string } }) {
+export default async function BillingPage({ searchParams }: { searchParams: PageSearchParams }) {
+  const successMessage = await readSearchParam(searchParams, 'success');
+  const errorMessage = await readSearchParam(searchParams, 'error');
   const cookieStore = await cookies();
   const sessionId = cookieStore.get(getSessionCookieName())?.value;
   const authState = await authService.getAuthState(sessionId);
@@ -29,8 +32,8 @@ export default async function BillingPage({ searchParams }: { searchParams: { su
   }
 
   return (
-    <AppShell title="Billing" description="Manage your plan and billing status" notice={searchParams.success}>
-      {searchParams.error ? <p className="error">{searchParams.error}</p> : null}
+    <AppShell title="Billing" description="Manage your plan and billing status" notice={successMessage}>
+      {errorMessage ? <p className="error">{errorMessage}</p> : null}
       <p>Current plan: {subscription?.plan ?? 'free'}</p>
       <p>Status: {subscription?.status ?? 'inactive'}</p>
       <form action={upgradeAction}>

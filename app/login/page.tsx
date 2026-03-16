@@ -6,8 +6,10 @@ import { toUserMessage } from '../../core/errors';
 import { authService, getDefaultSessionCookieOptions, getSessionCookieName } from '../../modules/auth';
 import { FormSubmitButton } from '../_components/form-submit-button';
 import { AuthShell } from '../_components/shell';
+import { readSearchParam, type PageSearchParams } from '../_components/search-params';
 
-export default function LoginPage({ searchParams }: { searchParams: { error?: string } }) {
+export default async function LoginPage({ searchParams }: { searchParams: PageSearchParams }) {
+  const errorMessage = await readSearchParam(searchParams, 'error');
   async function loginAction(formData: FormData): Promise<void> {
     'use server';
 
@@ -26,7 +28,7 @@ export default function LoginPage({ searchParams }: { searchParams: { error?: st
 
   return (
     <AuthShell title="Log in" footer={<p>Need an account? <Link href="/register">Register</Link></p>}>
-      {searchParams?.error ? <p className="error">{searchParams.error}</p> : null}
+      {errorMessage ? <p className="error">{errorMessage}</p> : null}
       <form action={loginAction}>
         <label htmlFor="email">Email</label>
         <input id="email" name="email" type="email" required autoComplete="email" />
