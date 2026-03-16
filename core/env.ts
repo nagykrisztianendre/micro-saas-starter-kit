@@ -1,16 +1,19 @@
 import { AppError } from './errors';
 
+const DEFAULT_DATABASE_URL = 'file:./dev.db';
+
 function readEnv(name: string): string | undefined {
   const value = process.env[name]?.trim();
   return value ? value : undefined;
 }
 
-function readRequiredEnv(name: string, message?: string): string {
-  const value = readEnv(name);
-  if (!value) {
-    throw new AppError('VALIDATION_ERROR', message ?? `Missing required environment variable: ${name}`, 500, true);
-  }
-  return value;
+function readDatabaseUrl(): string {
+  const value = readEnv('DATABASE_URL');
+  if (value) return value;
+
+  // Keep starter builds/dev smooth by defaulting to local SQLite when not explicitly configured.
+  process.env.DATABASE_URL = DEFAULT_DATABASE_URL;
+  return DEFAULT_DATABASE_URL;
 }
 
 function readNumberEnv(name: string, fallback: number): number {
@@ -28,7 +31,7 @@ export function getEnv() {
   return {
     nodeEnv,
     isProduction,
-    databaseUrl: readRequiredEnv('DATABASE_URL'),
+    databaseUrl: readDatabaseUrl(),
     authCookieName: readEnv('AUTH_COOKIE_NAME') ?? 'micro_saas_session',
     authSessionTtlHours: readNumberEnv('AUTH_SESSION_TTL_HOURS', 24),
     stripeSecretKey: readEnv('STRIPE_SECRET_KEY') ?? 'sk_test_placeholder',
@@ -41,4 +44,10 @@ export function getEnv() {
     smtpUser: readEnv('SMTP_USER'),
     smtpPass: readEnv('SMTP_PASS'),
   };
+}
+
+export function assertEnv(value: unknown, message: string): asserts value {
+  if (!value) {
+    throw new AppError('VALIDATION_ERROR', message, 500, true);
+  }
 }
