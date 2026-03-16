@@ -4,7 +4,7 @@ export function isAuthenticated(authState: AuthState | null): authState is AuthS
   return Boolean(authState?.session && authState.user);
 }
 
-export function requireAuthenticated(authState: AuthState | null): AuthState {
+export function requireAuth(authState: AuthState | null): AuthState {
   if (!isAuthenticated(authState)) {
     throw new Error('Authentication required.');
   }
@@ -12,6 +12,14 @@ export function requireAuthenticated(authState: AuthState | null): AuthState {
   return authState;
 }
 
-export function hasRole(authState: AuthState | null, role: UserRole): boolean {
-  return authState?.user.role === role;
+export function requireRole(authState: AuthState | null, role: UserRole): AuthState {
+  const state = requireAuth(authState);
+
+  if (state.user.role !== role) {
+    throw new Error('Forbidden.');
+  }
+
+  return state;
 }
+
+export const requireAuthenticated = requireAuth;

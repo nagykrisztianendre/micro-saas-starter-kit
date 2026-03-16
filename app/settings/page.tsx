@@ -1,10 +1,9 @@
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { authService, getSessionCookieName, requireAuth } from '../../../../modules/auth';
+import { authService, getSessionCookieName, requireAuth } from '../../modules/auth';
 
-export default async function DashboardPage() {
+export default async function SettingsPage() {
   const cookieStore = await cookies();
   const sessionId = cookieStore.get(getSessionCookieName())?.value;
   const authState = await authService.getAuthState(sessionId);
@@ -17,12 +16,8 @@ export default async function DashboardPage() {
 
   return (
     <main>
-      <h1>Dashboard</h1>
-      <p>Email: {user.email}</p>
-      <p>Role: {user.role}</p>
-      <p>
-        <Link href="/logout">Log out</Link>
-      </p>
+      <h1>Settings</h1>
+      <p>Profile update placeholder for {user.email}</p>
     </main>
   );
 }

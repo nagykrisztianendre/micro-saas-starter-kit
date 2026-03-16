@@ -2,7 +2,9 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { authService, getSessionCookieName, requireAuthenticated } from '../../modules/auth';
+import { getSessionCookieName, requireAuth } from '../../modules/auth';
+import { authService } from '../../modules/auth';
+import { billingService } from '../../modules/billing';
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -13,16 +15,20 @@ export default async function DashboardPage() {
     redirect('/login');
   }
 
-  const { user } = requireAuthenticated(authState);
+  const { user } = requireAuth(authState);
+  const subscription = await billingService.getUserSubscription(user.id);
 
   return (
     <main>
       <h1>Dashboard</h1>
       <p>Email: {user.email}</p>
       <p>Role: {user.role}</p>
-      <p>
-        <Link href="/logout">Log out</Link>
-      </p>
+      <p>Plan: {subscription?.plan ?? 'free'}</p>
+      <p>Subscription status: {subscription?.status ?? 'inactive'}</p>
+      <nav>
+        <Link href="/billing">Billing</Link> | <Link href="/settings">Settings</Link> | <Link href="/admin">Admin</Link> |
+        <Link href="/logout"> Log out</Link>
+      </nav>
     </main>
   );
 }

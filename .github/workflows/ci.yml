@@ -26,6 +26,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Prisma generate
+        run: pnpm prisma:generate
+
+      - name: Prisma push
+        run: pnpm db:push
+        env:
+          DATABASE_URL: file:./ci.db
+
       - name: Lint
         run: pnpm lint
 
@@ -34,6 +42,8 @@ jobs:
 
       - name: Test
         run: pnpm test
+        env:
+          DATABASE_URL: file:./ci.db
 
       - name: Build
         run: pnpm build

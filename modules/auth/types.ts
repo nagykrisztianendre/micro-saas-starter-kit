@@ -8,14 +8,14 @@ export interface User {
   createdAt: string;
 }
 
-export interface PublicUser {
+export interface AuthUser {
   id: string;
   email: string;
   role: UserRole;
   createdAt: string;
 }
 
-export interface Session {
+export interface UserSession {
   id: string;
   userId: string;
   createdAt: string;
@@ -23,8 +23,8 @@ export interface Session {
 }
 
 export interface AuthState {
-  user: PublicUser;
-  session: Session;
+  user: AuthUser;
+  session: UserSession;
 }
 
 export interface RegisterInput {
@@ -37,21 +37,17 @@ export interface LoginInput {
   password: string;
 }
 
-export interface AuthStore {
-  users: User[];
-  sessions: Session[];
-}
-
 export interface UserRepository {
   create(input: { email: string; passwordHash: string; role: UserRole }): Promise<User>;
   findByEmail(email: string): Promise<User | null>;
   findById(id: string): Promise<User | null>;
+  list(): Promise<User[]>;
   clear(): Promise<void>;
 }
 
 export interface SessionRepository {
-  create(input: { userId: string; expiresAt: string }): Promise<Session>;
-  findById(id: string): Promise<Session | null>;
+  create(input: { userId: string; expiresAt: string }): Promise<UserSession>;
+  findById(id: string): Promise<UserSession | null>;
   deleteById(id: string): Promise<void>;
   deleteExpired(nowIso: string): Promise<void>;
   clear(): Promise<void>;
