@@ -4,6 +4,14 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag to package (defaults to release tag or pushed tag)"
+        required: false
+        type: string
 
 jobs:
   release:
@@ -34,7 +42,7 @@ jobs:
 
       - name: Create distributable ZIP
         run: |
-          VERSION="${GITHUB_REF_NAME}"
+          VERSION="${{ inputs.version || github.event.release.tag_name || github.ref_name }}"
           ARTIFACT="micro-saas-starter-kit-pro-${VERSION}.zip"
           zip -r "$ARTIFACT" . \
             -x "*.git*" \
